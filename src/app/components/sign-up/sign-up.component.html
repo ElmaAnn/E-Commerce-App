@@ -1,0 +1,94 @@
+<div class="body">
+  <h2 class="text-center">Sign Up Form</h2>
+
+  <form #f="ngForm" (ngSubmit)="signup(f)">
+    <div class="form-group">
+      <input
+        ngModel
+        name="name"
+        #name="ngModel"
+        type="text"
+        class="form-control"
+        placeholder="Type your name here"
+        required
+      />
+      <div class="alert alert-danger" *ngIf="name.invalid && name.touched">
+        Name is required
+      </div>
+    </div>
+    <div class="form-group">
+      <input
+        ngModel
+        name="email"
+        type="text"
+        #email="ngModel"
+        class="form-control"
+        placeholder="Type your email id here"
+        required
+        email
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="email.errors?.required && email.touched"
+      >
+        Email id is required
+      </div>
+      <div
+        class="alert alert-danger"
+        *ngIf="email.errors?.email && email.touched"
+      >
+        Email format is not correct
+      </div>
+    </div>
+    <div class="form-group">
+      <input
+        ngModel
+        name="pwd"
+        #password="ngModel"
+        type="password"
+        class="form-control"
+        placeholder="Type your password here"
+        required
+        minlength="6"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="password.errors?.required && password.touched"
+      >
+        Password is required
+      </div>
+      <div
+        class="alert alert-danger"
+        *ngIf="password.errors?.minlength && password.touched"
+      >
+        Password is weak, should be equal to or more than 6 characters
+      </div>
+    </div>
+    <div class="form-group">
+      <input
+        ngModel
+        name="cpwd"
+        type="password"
+        class="form-control"
+        placeholder="Confirm your password"
+        minlength="6"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <input
+        ngModel
+        name="address"
+        type="text"
+        class="form-control"
+        placeholder="Type your address here"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="f.invalid">
+      Create an Account
+    </button>
+  </form>
+</div>
+
+<div class="alert alert-danger" *ngIf="errorMsg">{{ errorMsg }}</div>

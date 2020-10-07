@@ -1,0 +1,56 @@
+<h2 class="text-center">Login Form</h2>
+
+<form #f="ngForm" (ngSubmit)="login(f)">
+  <div class="form-group">
+    <input
+      ngModel
+      name="email"
+      #email="ngModel"
+      type="email"
+      class="form-control"
+      required
+      email
+      placeholder="Type your email here"
+    />
+    <div
+      class="alert alert-danger"
+      *ngIf="email.touched && email.errors?.required"
+    >
+      Email id is required
+    </div>
+    <div
+      class="alert alert-danger"
+      *ngIf="email.touched && email.errors?.email"
+    >
+      Email format is not correct..!
+    </div>
+  </div>
+  <div class="from-group">
+    <input
+      ngModel
+      name="password"
+      #password="ngModel"
+      type="password"
+      class="form-control"
+      required
+      minlength="6"
+      placeholder="Type your password"
+    />
+    <div
+      class="alert alert-danger"
+      *ngIf="password.touched && password.errors?.required"
+    >
+      Password is required
+    </div>
+    <div
+      class="alert alert-danger"
+      *ngIf="password.touched && password.errors?.minlength"
+    >
+      Password is weak..should be atleast 6 characters
+    </div>
+  </div>
+  <br />
+  <button class="btn btn-primary" [disabled]="f.invalid" (click)="login(f)">
+    Login
+  </button>
+</form>
